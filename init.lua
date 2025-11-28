@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -102,13 +102,17 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
+
+-- [[ JESPERS OPTIONS ]]
+vim.o.winborder = 'rounded'
+vim.o.smartindent = true
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -159,7 +163,7 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.o.scrolloff = 15
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -204,6 +208,28 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- [[ JESPERS KEYMAPS]]
+-- Basic editor changes
+vim.keymap.set('i', 'jj', '<ESC>') -- jj to escape insert mode
+vim.keymap.set('n', 'o', 'o<ESC>') -- o to add new line but not enter insert mode
+vim.keymap.set('n', 'O', 'O<ESC>') -- O to add new line but not enter insert mode
+
+-- Navigation Settings
+vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Up half screen centers after move
+vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Down half screen centers after move
+
+vim.keymap.set('n', 'n', 'nzz') -- Centre cursor after search
+vim.keymap.set('n', 'N', 'Nzz') -- Centre cursor after search
+vim.keymap.set('n', '#', '#zz') -- Centre cursor after search
+vim.keymap.set('n', '*', '*zz') -- Centre cursor after search
+
+vim.keymap.set('n', 'Y', 'y$') -- Yank from cursor to the end of line
+
+vim.keymap.set('n', '<leader><space>v', ':vsplit') -- Split file vertically
+vim.keymap.set('n', '<leader><space>s', ':split') -- Split file horizontally
+
+vim.keymap.set('n', 'K', 'r<CR>') -- Insert line break
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
