@@ -208,6 +208,27 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      --
+
+      -- Air config
+      vim.lsp.config['air'] = {
+        on_attach = function(_, bufnr)
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          })
+        end,
+      }
+
+      vim.lsp.config['r_language_server'] = {
+        on_attach = function(client, _)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+      }
+
       local servers = {
         -- clangd = {},
         -- gopls = {},

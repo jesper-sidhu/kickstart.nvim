@@ -57,7 +57,10 @@ vim.keymap.set('n', 'Y', 'y$') -- Yank from cursor to the end of line
 vim.keymap.set('n', '<leader><space>v', ':vsplit') -- Split file vertically
 vim.keymap.set('n', '<leader><space>s', ':split') -- Split file horizontally
 
-vim.keymap.set('n', 'K', 'r<CR>') -- Insert line break
+vim.keymap.set('n', 'K', 'i<CR><ESC>') -- Insert line break
+
+vim.keymap.set('t', '<ESC>', '<C-\\><C-n>') -- Use Esc to return to Normal mode in vim term
+vim.keymap.set('n', '<leader>bd', ':bd!<CR>') -- Shortcut to close buffer
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -72,3 +75,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+-- Shortcut to open terminal in vertical mode
+vim.api.nvim_create_user_command('Vterm', function()
+  vim.cmd 'vertical terminal'
+end, {})
